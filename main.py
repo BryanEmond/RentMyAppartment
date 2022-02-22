@@ -51,7 +51,7 @@ def login():
     responce = mycursor.fetchall()
     print(responce)
     if(len(responce) == 1 and bcrypt.checkpw(data["password"].encode("utf-8"),responce[0][0].encode("utf-8"))):
-        return ("wrong password")#redirect(request.url+"/",202,'letsgo')
+        return ("good password")#redirect(request.url+"/",202,'letsgo')
     elif(not bcrypt.checkpw(data["password"].encode("utf-8"),responce[0][0].encode("utf-8"))):
         return ("wrong password")
     else:
