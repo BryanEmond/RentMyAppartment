@@ -22,6 +22,9 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
                 {% if USER != null %}
+                <button class="btn btn-dark" id="manageAd2">
+                    <i class="fa-solid fa-rectangle-ad"></i>
+                </button>
                 <div class="btn-group dropdown">
                     <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="true">
@@ -87,6 +90,11 @@
                                 </form>
                             </div>
                         </div>
+                        {% if USER != null %}
+                        <button class="btn btn-primary margin-style" style="width: 100%;" id="manageAd">
+                            Manage ad
+                        </button>
+                        {% endif %}
                         <button class="btn btn-primary margin-style" style="width: 100%;" type="button">
                             Forum
                         </button>
@@ -206,8 +214,12 @@
     </div>
 
 
+    <script>
+        const USERConst = '{{ USER[1] }}';
+    </script>
+
     <!-- JQuery / map api/ login Script -->
-    <script src="../static/script/loginForm.js"></script>
+    <script src="../static/script/apiRequest.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJJejr2yv6n8PoEDwq_hw7Pnr9Z24BWRM&callback=initMap&libraries=&v=weekly"
         async></script>

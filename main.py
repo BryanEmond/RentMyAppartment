@@ -1,5 +1,7 @@
+from re import template
 from flask import Flask, jsonify, make_response, request, redirect, render_template, url_for
 from dotenv import load_dotenv
+from itsdangerous import json
 # from flask_cors import CORS
 import pymysql
 import bcrypt
@@ -72,6 +74,24 @@ def sign_out():
         resp.set_cookie('userIdConnecetion','',expires=0)
         return resp
     return('',404)
+
+@app.route("/api/redirectToAdManager",methods=['POST'])
+def redirectToAdManager():
+    resp = make_response(jsonify({"redirect":"/manageAd"}),request.form.get('UID'))
+    return resp
+
+@app.route("/manageAd")
+def manageAd():
+    if("userIdConnecetion" not in request.cookies):
+        return render_template("index.html")
+    payload = jwt.decode(request.cookies.get("userIdConnecetion"),os.getenv('SECRET'), algorithms="HS256")
+    sql = "SELECT name,UID FROM user where UID = %s"
+    mycursor.execute(sql,payload["IdUser"])
+    user = mycursor.fetchone()
+    return render_template("manageAd.html" ,USER=user)
+
+    
+
 
 if __name__ == "__main__":
     app.run(debug=True)

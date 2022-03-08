@@ -39,3 +39,16 @@ $("#signOut, #signOut2").click((e) => {
         }
     })
 })
+
+$("#manageAd, #manageAd2").click((e) => {
+    e.preventDefault();
+
+    $.ajax({
+        url: '/api/redirectToAdManager',
+        type: 'post',
+        data: { "UID": USERConst },
+        success: (response) => {
+            location.href = response.redirect
+        }
+    })
+})
