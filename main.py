@@ -34,7 +34,6 @@ def register():
     sql = "SELECT name,email FROM user where UID = %s"
     mycursor.execute(sql,payload["IdUser"])
     user = mycursor.fetchone()
-    # print(user,file=sys.stderr)
     return render_template("index.html",USER =user)
 
 @app.route("/api/login",methods=['POST'])
