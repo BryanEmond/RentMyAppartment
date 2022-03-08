@@ -6,7 +6,7 @@ $("#loginForm").submit((e) => {
         type: 'post',
         data: data,
         success: (response) => {
-            window.location.href = response.redirect
+            location.reload();
         }
     })
 });
@@ -25,7 +25,6 @@ $("#createAccountForm").submit((e) => {
             type: 'post',
             data: data,
             success: (response) => {
-                window.location.href = response.redirect
             }
         })
     }

@@ -23,10 +23,10 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
                 {% if USER != null %}
-                <div class="btn-group dropstart">
+                <div class="btn-group dropdown">
                     <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="true">
-                        <i class="fa-solid fa-user"></i>
+                        <i class="fa-solid fa-user" id="marginRightSpace"></i> {{ USER[0] }}
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <!-- Dropdown menu links -->
@@ -58,10 +58,10 @@
                 <div class="d-none d-md-block col-md-3 col-lg-2 bg-dark colheigh">
                     <div class="row">
                         <div class="col">
-                            <h1 style="color: white;">***</h1>
+                            <h5 style="color: white;">*Logo</h5>
                         </div>
                         <div class="col">
-                            <h3 style="color: white;">RYA</h3>
+                            <h3 style="color: white;">RentMyApp</h3>
                         </div>
                     </div>
                     <hr id="hr">
@@ -88,6 +88,9 @@
                                 </form>
                             </div>
                         </div>
+                        <button class="btn btn-primary margin-style" style="width: 100%;" type="button">
+                            Forum
+                        </button>
                         <!-- <a href="#news">News</a>
                     <a href="#contact">Contact</a>
                     <a href="#about">About</a> -->
@@ -99,7 +102,8 @@
                         <div class="btn-group dropup">
                             <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="true">
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-solid fa-user" id="marginRightSpace"></i>
+                                    {{ USER[0] }}
                             </button>
                             <ul class="dropdown-menu bg-dark">
                                 <!-- Dropdown menu links -->
@@ -112,9 +116,9 @@
                         </div>
                         {% else %}
                         <div id="regLoginbtn">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary margin-style" data-bs-toggle="modal"
                                 data-bs-target="#modalLogin">Login</button>
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-secondary margin-style" data-bs-toggle="modal"
                                 data-bs-target="#modalCreateAccount">Create account</button>
                         </div>
 
@@ -129,22 +133,21 @@
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input class="form-control" type="email" placeholder="Email" name="email" id="email">
-                    <input class="form-control margin-style" type="password" placeholder="Password" name="password"
-                        id="password">
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form id="loginForm">
+                <form id="loginForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="email" placeholder="Email" name="email" id="email">
+                        <input class="form-control margin-style" type="password" placeholder="Password" name="password"
+                            id="password">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button class="btn btn-primary" type="submit">Login</button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -178,6 +181,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal for the appartment search -->
     <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

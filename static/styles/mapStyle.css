@@ -6,7 +6,7 @@
   color: white;
 }
 #pdiv{
-  bottom: 1%;
+  bottom: 2%;
   width: calc(100% - 1.5rem);
   position:absolute;
 }
@@ -31,4 +31,7 @@
 }
 #regLoginbtn{
   text-align: center;
+}
+#marginRightSpace{
+  margin-right: 1%;
 }
