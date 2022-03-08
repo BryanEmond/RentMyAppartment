@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     <div class="d-block d-md-none">
         <!-- Navbar in mini -->
         <nav class="navbar navbar-dark bg-dark">
@@ -30,11 +29,11 @@
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <!-- Dropdown menu links -->
-                        <li><button class="btn btn-dark" style="width: 100%;">Setting</button></li>
-                        <li><button class="btn btn-dark" style="width: 100%;">Profil</button></li>
+                        <button class="btn btn-dark" style="width: 100%;">Setting</button>
+                        <button class="btn btn-dark" style="width: 100%;">Profil</button>
                         <hr id="hr">
-                        <li><button class="btn btn-dark" style="width: 100%;">Sign out</button>
-                        </li>
+                        <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
+
                     </ul>
                 </div>
                 {% else %}
@@ -103,15 +102,14 @@
                             <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="true">
                                 <i class="fa-solid fa-user" id="marginRightSpace"></i>
-                                    {{ USER[0] }}
+                                {{ USER[0] }}
                             </button>
                             <ul class="dropdown-menu bg-dark">
                                 <!-- Dropdown menu links -->
-                                <li><button class="btn btn-dark" style="width: 100%;">Setting</button></li>
-                                <li><button class="btn btn-dark" style="width: 100%;">Profil</button></li>
+                                <button class="btn btn-dark" style="width: 100%;">Setting</button>
+                                <button class="btn btn-dark" style="width: 100%;">Profil</button>
                                 <hr id="hr">
-                                <li><button class="btn btn-dark" style="width: 100%;">Sign out</button>
-                                </li>
+                                <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
                             </ul>
                         </div>
                         {% else %}

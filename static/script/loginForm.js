@@ -1,32 +1,41 @@
 $("#loginForm").submit((e) => {
     e.preventDefault();
-    let data = { "email": $("#email").val(), "password": $("#password").val() }
     $.ajax({
         url: '/api/login',
         type: 'post',
-        data: data,
+        data: { "email": $("#email").val(), "password": $("#password").val() },
         success: (response) => {
+            console.log(response)
             location.reload();
         }
     })
 });
 $("#createAccountForm").submit((e) => {
     e.preventDefault();
-    let password = $("#passwordReg").val()
-    let password2 = $("#reEnterPassword").val()
-    if (password === password2) {
-        let data = {
-            "name": $("#name").val(),
-            "email": $("#emailReg").val(),
-            "password": password,
-        }
+    if ($("#passwordReg").val() === $("#reEnterPassword").val()) {
         $.ajax({
             url: '/api/create_account',
             type: 'post',
-            data: data,
+            data: {
+                "name": $("#name").val(),
+                "email": $("#emailReg").val(),
+                "password": $("#passwordReg").val(),
+            },
             success: (response) => {
+                console.log(response)
             }
         })
     }
+})
 
+$("#signOut, #signOut2").click((e) => {
+    e.preventDefault();
+    $.ajax({
+        url: '/api/sign_out',
+        type: 'post',
+        data: null,
+        success: (response) => {
+            console.log(response)
+        }
+    })
 })
