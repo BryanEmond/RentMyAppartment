@@ -8,6 +8,7 @@ import os
 import sys
 import jwt
 
+
 load_dotenv()
 app = Flask(__name__)
 # app.run(use_reloader=True)
@@ -53,17 +54,20 @@ def login():
 
 @app.route("/api/create_account",methods=['POST'])
 def create_account():
-    # print(request.form.get('name'),file=sys.stderr)
-    password = bytes(request.form.get('password'), encoding='utf-8')
-    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-    base64_byte = base64.b64encode(request.form.get('email').encode("ascii"))
-    base64_string = base64_byte.decode("ascii")
-    sql = "INSERT INTO password VALUES (%s,%s)"
-    mycursor.execute(sql,("PID"+base64_string[9:15],hashed))
-    sql = "INSERT INTO user VALUES (%s,%s,%s,%s)"
-    mycursor.execute(sql,("UID"+base64_string[0:9],request.form.get('name'),request.form.get('email'),"PID"+base64_string[9:15]))
-    mydb.commit()
-    return('',200)
+    try:
+        # print(request.form.get('name'),file=sys.stderr)
+        password = bytes(request.form.get('password'), encoding='utf-8')
+        hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+        base64_byte = base64.b64encode(request.form.get('email').encode("ascii"))
+        base64_string = base64_byte.decode("ascii")
+        sql = "INSERT INTO password VALUES (%s,%s)"
+        mycursor.execute(sql,("PID"+base64_string[9:15],hashed))
+        sql = "INSERT INTO user VALUES (%s,%s,%s,%s)"
+        mycursor.execute(sql,("UID"+base64_string[0:9],request.form.get('name'),request.form.get('email'),"PID"+base64_string[9:15]))
+        mydb.commit()
+        return('',200)
+    except:
+        return ("",404)
 
 @app.route("/api/sign_out",methods=['POST'])
 def sign_out():

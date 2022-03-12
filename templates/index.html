@@ -145,6 +145,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-warning hideAlert" id="alertAccountLoginFailed" role="alert">
+                            All of following section aren't filled!
+                        </div>
+                        <div class="alert alert-danger hideAlert" id="alertAccountLoginAPIFailed" role="alert">
+                            The login information are incorrect!
+                        </div>
+                        <!-- <div class="alert alert-success" id="alertAccountCreationSuccess" role="alert">
+                            Account Created!
+                        </div> -->
                         <input class="form-control" type="email" placeholder="Email" name="email" id="email">
                         <input class="form-control margin-style" type="password" placeholder="Password" name="password"
                             id="password">
@@ -169,6 +178,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-warning hideAlert" id="alertAccountCreationFailed" role="alert">
+                        All of following section aren't filled!
+                    </div>
+                    <div class="alert alert-warning hideAlert" id="alertAccountCreationDiffPassword" role="alert">
+                        Both password aren't egal!
+                    </div>
+                    <div class="alert alert-success hideAlert" id="alertAccountCreationSuccess" role="alert">
+                        Account Created!
+                    </div>
+                    <div class="alert alert-danger hideAlert" id="alertAccountCreationAPIFailed" role="alert">
+                        A problem apeared during the account creation!
+                    </div>
                     <input class="form-control" type="text" placeholder="Name" name="name" id="name">
                     <input class="form-control margin-style" type="email" placeholder="Email" name="email"
                         id="emailReg">

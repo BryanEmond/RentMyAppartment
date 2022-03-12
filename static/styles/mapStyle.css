@@ -35,3 +35,6 @@
 #marginRightSpace{
   margin-right: 1%;
 }
+.hideAlert{
+  display: none;
+}
