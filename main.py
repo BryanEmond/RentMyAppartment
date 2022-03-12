@@ -1,7 +1,5 @@
-from re import template
 from flask import Flask, jsonify, make_response, request, redirect, render_template, url_for
 from dotenv import load_dotenv
-from itsdangerous import json
 # from flask_cors import CORS
 import pymysql
 import bcrypt
@@ -17,7 +15,7 @@ app = Flask(__name__)
 
 mydb = pymysql.connect(
     host="localhost",
-    user="root",
+    user="bor3",
     password=os.getenv('DBPASSWORD'),
     database="rentmyappartment"
 )

@@ -213,10 +213,11 @@
         </div>
     </div>
 
-
+    {% if USER != null %}
     <script>
         const USERConst = '{{ USER[1] }}';
     </script>
+    {% endif %}
 
     <!-- JQuery / map api/ login Script -->
     <script src="../static/script/apiRequest.js"></script>
