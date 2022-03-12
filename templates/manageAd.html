@@ -32,7 +32,6 @@
                 <ul class="dropdown-menu bg-dark">
                     <!-- Dropdown menu links -->
                     <button class="btn btn-dark" style="width: 100%;">Setting</button>
-                    <button class="btn btn-dark" style="width: 100%;">Profil</button>
                     <hr id="hr">
                     <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
 
@@ -61,30 +60,34 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <!-- Modal for the creation of an ad -->
     <div class="modal fade" id="modalCreateAd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <form id="createAdForm">
-                <div class="modal-content">
+            <div class="modal-content">
+                <form id="createAdForm">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Create an ad</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input class="form-control" type="text" placeholder="Name" name="name" id="name">
-                        <input class="form-control" type="text" placeholder="Name" name="name" id="name">
-                        <input class="form-control" type="text" placeholder="Name" name="name" id="name">
-                        <input class="form-control" type="text" placeholder="Name" name="name" id="name">
+                        <input class="form-control margin-style" type="text" placeholder="Title" name="name" id="name">
+                        <input class="form-control margin-style" type="text" placeholder="Adress" name="name" id="name">
+                        <select class="form-select margin-style" aria-label="Default select example">
+                            <option selected>Size</option>
+                            <option value="1">1 1/2</option>
+                            <option value="2">2 1/2</option>
+                            <option value="3">3 1/2</option>
+                        </select>
+                        <textarea class="form-control margin-style" type="text" placeholder="Description" name="name"
+                            id="name"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button class="btn btn-primary" type="submit">Create account</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <!-- JQuery / map api/ login Script -->

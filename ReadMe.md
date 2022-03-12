@@ -9,7 +9,8 @@ DBPASSWORD=YOUR_DATABASE_PASSWORD<br>
 SECRET=YOUR_JWT_SECRET
 
 <h3>Setup MySQL</h3>
-mysql -u root -p<br>
+mysql -u root -p
+<br>
 source ./backend_glo_2005/sql/dbcommand.sql
 
 <h3>To use Flask</h3>

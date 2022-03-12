@@ -1,3 +1,4 @@
+let geocoder;
 function initMap() {
   // The location of Uluru
   const uluru = { lat: 45.5016889, lng: -73.567256 };
@@ -26,4 +27,18 @@ function initMap() {
     map: minimap,
   });
   marker2.setMap(null);
+  geocoder = new google.maps.Geocoder();
+}
+function geocode(request) {
+  clear();
+  geocoder
+    .geocode(request)
+    .then((result) => {
+      const { results } = result;
+      console.log(results)
+      return results;
+    })
+    .catch((e) => {
+      alert("Geocode was not successful for the following reason: " + e);
+    });
 }

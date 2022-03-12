@@ -61,7 +61,7 @@ $("#signOut, #signOut2").click((e) => {
         type: 'post',
         data: null,
         success: (response) => {
-            console.log(response)
+            location.reload();
         }
     })
 })
