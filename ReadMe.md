@@ -13,6 +13,6 @@ mysql -u root -p
 source ./backend_glo_2005/sql/dbcommand.sql
 
 <h3>To use Flask</h3>
-export FLASK_APP=main
-export FLASK_ENV=development
+export FLASK_APP=main\n
+export FLASK_ENV=development\n
 flask run
