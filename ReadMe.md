@@ -1,5 +1,4 @@
 <h1>Setup Project</h1>
-<br>
 <h3>Installation dependencies</h3>
 pip install flask PyMySQL bcrypt python-dotenv jw
 
