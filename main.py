@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 mydb = pymysql.connect(
     host="localhost",
-    user="bor3",
+    user=os.getenv('DBPUSER'),
     password=os.getenv('DBPASSWORD'),
     database="rentmyappartment"
 )
