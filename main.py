@@ -92,6 +92,10 @@ def manageAd():
     user = mycursor.fetchone()
     return render_template("manageAd.html" ,USER=user)
 
+@app.route("/api/CreateAd")
+def CreateAd():
+    sql = "INSERT INTO appartment values (AID char(12) NOT NULL,title char(100),appAddress char(100),zipCode char(100),town char(100),size char(10),price int, description text,coordinate char(20),UID char(12) not null)"
+    return ("",202)
     
 
 

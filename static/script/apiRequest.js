@@ -43,7 +43,7 @@ $("#createAccountForm").submit((e) => {
             })
         }
         else {
-            
+
             $("#alertAccountCreationDiffPassword").css("display", "block");
         }
     }
@@ -73,6 +73,28 @@ $("#manageAd, #manageAd2").click((e) => {
         url: '/api/redirectToAdManager',
         type: 'post',
         data: { "UID": USERConst },
+        success: (response) => {
+            location.href = response.redirect
+        }
+    })
+})
+
+$("#createAdForm").submit((e) => {
+    e.preventDefault();
+
+    $.ajax({
+        url: '/api/CreateAd',
+        type: 'post',
+        data: {
+            "UID": USERConst,
+            "title":"",
+            "address":"",
+            "zipCode":"",
+            "town":"",
+            "size":"",
+            "description":"",
+            "price":""
+        },
         success: (response) => {
             location.href = response.redirect
         }
