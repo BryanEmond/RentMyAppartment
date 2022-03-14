@@ -6,7 +6,8 @@ pip install flask PyMySQL bcrypt python-dotenv pyjwt
 touch .env
 <br>
 <h7>add to the .env file<h7><br>
-DBPASSWORD=YOUR_DATABASE_PASSWORD<br>
+DBPASSWORD=YOUR_DATABASE_PASSWORD
+<br>
 SECRET=YOUR_JWT_SECRET
 
 <h3>Setup MySQL</h3>

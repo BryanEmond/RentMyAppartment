@@ -13,126 +13,42 @@
 </head>
 
 <body>
-    <div class="d-block d-md-none">
-        <!-- Navbar in mini -->
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand">*Logo</a>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalSearch">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                {% if USER != null %}
-                <button class="btn btn-dark" id="manageAd2">
-                    <i class="fa-solid fa-rectangle-ad"></i>
-                </button>
-                <div class="btn-group dropdown">
-                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="true">
-                        <i class="fa-solid fa-user" id="marginRightSpace"></i> {{ USER[0] }}
-                    </button>
-                    <ul class="dropdown-menu bg-dark">
-                        <!-- Dropdown menu links -->
-                        <button class="btn btn-dark" style="width: 100%;">Setting</button>
-                        <hr id="hr">
-                        <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
-
-                    </ul>
-                </div>
-                {% else %}
-                <div id="regLoginbtn">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalLogin">Login</button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#modalCreateAccount">Create account</button>
-                </div>
-
-                {% endif %}
-            </div>
-        </nav>
-
-        <div id="minimap"></div>
-    </div>
-    <div class="d-none d-md-block">
-        <!-- full screen -->
+    <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <div class="row">
-                <div class="d-none d-md-block col-md-3 col-lg-2 bg-dark colheigh">
-                    <div class="row">
-                        <div class="col">
-                            <h5 style="color: white;">*Logo</h5>
-                        </div>
-                        <div class="col">
-                            <h3 style="color: white;">RentMyApp</h3>
-                        </div>
-                    </div>
+            <a class="navbar-brand">*Logo</a>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalSearch">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            {% if USER != null %}
+            <button class="btn btn-dark" id="manageAd">
+                <i class="fa-solid fa-rectangle-ad"></i>
+            </button>
+            <div class="btn-group dropdown">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="true">
+                    <i class="fa-solid fa-user" id="marginRightSpace"></i> {{ USER[0] }}
+                </button>
+                <ul class="dropdown-menu bg-dark">
+                    <!-- Dropdown menu links -->
+                    <button class="btn btn-dark" style="width: 100%;">Setting</button>
                     <hr id="hr">
-                    <div class="sidebar">
-                        <button class="btn btn-primary" style="width: 100%;" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Search
-                        </button>
-                        <div class="collapse " id="collapseExample">
-                            <div class="card-body bg-dark">
-                                <form>
-                                    <input class="form-control" type="search" placeholder="Town" aria-label="Search">
-                                    <input class="form-control margin-style" type="search" placeholder="Country"
-                                        aria-label="Search">
-                                    <select class="form-select margin-style" aria-label="Default select example">
-                                        <option selected>Size</option>
-                                        <option value="1">1 1/2</option>
-                                        <option value="2">2 1/2</option>
-                                        <option value="3">3 1/2</option>
-                                    </select>
-                                    <button class="btn btn-outline-success margin-style" id="btnad"
-                                        type="submit">Search</button>
-                                    <!-- <button class="btn btn-outline-primary margin-style" id="btnad" type="button">Advance search</button> -->
-                                </form>
-                            </div>
-                        </div>
-                        {% if USER != null %}
-                        <button class="btn btn-primary margin-style" style="width: 100%;" id="manageAd">
-                            Manage ad
-                        </button>
-                        {% endif %}
-                        <button class="btn btn-primary margin-style" style="width: 100%;" type="button">
-                            Forum
-                        </button>
-                        <!-- <a href="#news">News</a>
-                    <a href="#contact">Contact</a>
-                    <a href="#about">About</a> -->
-                    </div>
+                    <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
 
-                    <div id="pdiv">
-                        <hr id="hr">
-                        {% if USER != null %}
-                        <div class="btn-group dropup">
-                            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-expanded="true">
-                                <i class="fa-solid fa-user" id="marginRightSpace"></i>
-                                {{ USER[0] }}
-                            </button>
-                            <ul class="dropdown-menu bg-dark">
-                                <!-- Dropdown menu links -->
-                                <button class="btn btn-dark" style="width: 100%;">Setting</button>
-                                <hr id="hr">
-                                <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
-                            </ul>
-                        </div>
-                        {% else %}
-                        <div id="regLoginbtn">
-                            <button type="button" class="btn btn-primary margin-style" data-bs-toggle="modal"
-                                data-bs-target="#modalLogin">Login</button>
-                            <button type="button" class="btn btn-secondary margin-style" data-bs-toggle="modal"
-                                data-bs-target="#modalCreateAccount">Create account</button>
-                        </div>
-
-                        {% endif %}
-                    </div>
-                </div>
-                <div id="map" class="col"></div>
+                </ul>
             </div>
+            {% else %}
+            <div id="regLoginbtn">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalLogin">Login</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#modalCreateAccount">Create account</button>
+            </div>
+
+            {% endif %}
         </div>
-    </div>
+    </nav>
+    <div id="map"></div>
+
     <!-- Modal for the login -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -199,7 +115,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" type="submit">Create account</button>
+                        <button class="btn btn-primary" type="submit" id="btnAccountCreation">Create account</button>
                     </div>
                 </form>
             </div>

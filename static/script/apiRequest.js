@@ -35,6 +35,7 @@ $("#createAccountForm").submit((e) => {
                 success: (response, status) => {
                     $(".hideAlert").css("display", "none");
                     $("#alertAccountCreationSuccess").css("display", "block");
+                    $("#btnAccountCreation").prop('disabled', true);
                 },
                 error: (error) => {
                     $(".hideAlert").css("display", "none");
@@ -54,7 +55,7 @@ $("#createAccountForm").submit((e) => {
 
 })
 
-$("#signOut, #signOut2").click((e) => {
+$("#signOut").click((e) => {
     e.preventDefault();
     $.ajax({
         url: '/api/sign_out',
@@ -66,7 +67,7 @@ $("#signOut, #signOut2").click((e) => {
     })
 })
 
-$("#manageAd, #manageAd2").click((e) => {
+$("#manageAd").click((e) => {
     e.preventDefault();
 
     $.ajax({
@@ -81,22 +82,5 @@ $("#manageAd, #manageAd2").click((e) => {
 
 $("#createAdForm").submit((e) => {
     e.preventDefault();
-
-    $.ajax({
-        url: '/api/CreateAd',
-        type: 'post',
-        data: {
-            "UID": USERConst,
-            "title":"",
-            "address":"",
-            "zipCode":"",
-            "town":"",
-            "size":"",
-            "description":"",
-            "price":""
-        },
-        success: (response) => {
-            location.href = response.redirect
-        }
-    })
+    geocode({ address: $("#address").val() +" "+ $("#town").val() +" "+ $("#zipCode").val()});
 })
