@@ -105,7 +105,10 @@ def manageAd():
     sql = "SELECT name,UID FROM user where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     user = mycursor.fetchone()
-    return render_template("manageAd.html", USER=user)
+    sql = "SELECT * FROM appartments where UID = %s ORDER BY appartment ASC"
+    mycursor.execute(sql, payload["IdUser"])
+    appartment = mycursor.fetchall()
+    return render_template("manageAd.html", USER=user, APPARTMENT=appartment)
 
 
 @app.route("/api/CreateAd", methods=['POST'])

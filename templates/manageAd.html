@@ -40,26 +40,32 @@
             {% endif %}
         </div>
     </nav>
+
     <div class="container">
-        <div class="margin-style">
-            <div class="card" style="width: 18rem;">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+        <div class="row">
+            {% for i in APPARTMENT %}
+            <div class="col-lg-4 col">
+                <div class="card margin-style" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i[1]}}</h5>
+                        <p class="card-text">{{i[8]}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{i[2] + " app." + i[3]}}</li>
+                        <li class="list-group-item">{{i[6]}}</li>
+                        <li class="list-group-item">{{i[5]}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
+    </div>
+    </div>
     </div>
     <!-- Modal for the creation of an ad -->
     <div class="modal fade" id="modalCreateAd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,7 +79,8 @@
                     <div class="modal-body">
                         <input class="form-control margin-style" type="text" placeholder="Title" id="title">
                         <input class="form-control margin-style" type="text" placeholder="Address" id="address">
-                        <input class="form-control margin-style" type="text" placeholder="Appartment number" id="appartment">
+                        <input class="form-control margin-style" type="text" placeholder="Appartment number"
+                            id="appartment">
                         <input class="form-control margin-style" type="text" placeholder="Zip code" id="zipCode">
                         <input class="form-control margin-style" type="text" placeholder="Town" id="town">
                         <select class="form-select margin-style" aria-label="Default select example" id="size">
@@ -82,7 +89,8 @@
                             <option value="2 1/2">2 1/2</option>
                             <option value="3 1/2">3 1/2</option>
                         </select>
-                        <textarea class="form-control margin-style" type="text" placeholder="Description"Town id="description"></textarea>
+                        <textarea class="form-control margin-style" type="text" placeholder="Description" Town
+                            id="description"></textarea>
                         <input class="form-control margin-style" type="number" placeholder="Price" id="price">
                     </div>
                     <div class="modal-footer">
@@ -96,6 +104,7 @@
     {% if USER != null %}
     <script>
         const USERConst = '{{ USER[1] }}';
+        console.log('{{APPARTMENT}}')
     </script>
     {% endif %}
     <!-- JQuery / map api/ login Script -->
@@ -105,8 +114,8 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJJejr2yv6n8PoEDwq_hw7Pnr9Z24BWRM&callback=initMap&libraries=&v=weekly"
-    async></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJJejr2yv6n8PoEDwq_hw7Pnr9Z24BWRM&callback=initMap&libraries=&v=weekly"
+        async></script>
 </body>
 
 </html>
