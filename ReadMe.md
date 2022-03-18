@@ -33,7 +33,7 @@ set FLASK_APP=main.py
 set FLASK_ENV=development
 <br>
 flask run
-<h2>CMD</h2>
+<h2>Fish</h2>
 set -x FLASK_APP hello
 <br>
 set -x FLASK_ENV=development
