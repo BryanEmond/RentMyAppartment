@@ -14,10 +14,14 @@ SECRET=YOUR_JWT_SECRET
 mysql -u root -p
 <br>
 source ./backend_glo_2005/sql/dbcommand.sql
-
-<h3>To use Flask</h3>
+<h1>To use Flask</h3>
+<h2>Linux</h2>
 export FLASK_APP=main
 <br>
 export FLASK_ENV=development
+<br>
+flask run
+<h2>Linux</h2>
+env:FLASK_APP = "hello"
 <br>
 flask run
