@@ -21,12 +21,6 @@ export FLASK_APP=main
 export FLASK_ENV=development
 <br>
 flask run
-<h2>PowerShell</h2>
-env:FLASK_APP = main
-<br>
-export FLASK_ENV=development
-<br>
-flask run
 <h2>CMD</h2>
 set FLASK_APP=main.py
 <br>
