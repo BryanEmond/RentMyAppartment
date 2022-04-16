@@ -42,7 +42,6 @@ INSERT INTO GrandeurAppt ('cinq-et-demi', 5.5 );
 
 
 
-INSERT INTO appartments 
 
 
 
