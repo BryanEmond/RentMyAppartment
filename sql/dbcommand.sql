@@ -9,3 +9,5 @@ CREATE TABLE City(CID char(12),
                 CoordinateCity text,
                 PRIMARY KEY(CID));
 
+CREATE TABLE GrandeurAppt (AID char(12) foreign key NOT NULL, size float(2) primary key );
+
