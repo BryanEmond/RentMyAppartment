@@ -25,7 +25,7 @@ AS BEGIN
     DECLARE @AID INT;
     DECLARE @count INT;
     SELECT @AID = AID FROM DELETED;
-    SELECT @count = COUNT(*) FROM city WHERE country_id = @AID;
+    SELECT @count = COUNT(*) FROM appartments WHERE AID = @AID;
     IF @SOLD = 1
         DELETE FROM appartments WHERE AID = @AID;
     ELSE
