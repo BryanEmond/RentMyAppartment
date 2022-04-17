@@ -22,8 +22,9 @@ CREATE TABLE appartments( AID int NOT NULL, title char(100), address char(100), 
 
 INSERT INTO password('001', naruto);
 INSERT INTO password('002', sasuke);
-CREATE TABLE user('kingmufasa99', 'Mostafa Filali', 'mfilali99@hotmail.com', '001');
-CREATE TABLE user('bryan', 'Bryan Emond', 'mfilali99@hotmail.com', '002');
+
+INSERT INTO user('kingmufasa99', 'Mostafa Filali', 'mfilali99@hotmail.com', '001');
+INSERT INTO user('bryan', 'Bryan Emond', 'mfilali99@hotmail.com', '002');
 INSERT INTO GrandeurAppt ('un-et-demi', 1.5 );
 INSERT INTO GrandeurAppt ('deux-et-demi', 2.5 );
 INSERT INTO GrandeurAppt ('trois-et-demi', 3.5 );
