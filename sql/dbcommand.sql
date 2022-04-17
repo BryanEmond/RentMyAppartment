@@ -1,13 +1,13 @@
 CREATE DATABASE rentmyappartment;
 USE rentmyappartment;
-CREATE TABLE password(PID char(9) primary key, password text);
+CREATE TABLE password(PID char(100) primary key, password text);
 CREATE TABLE user(
   UID char(100) NOT NULL,
   PRIMARY KEY(UID),
-  first_name char(100),
-  last_name char(100),
-  middle_name char(100),
-  PID char(12),
+  firstName char(100),
+  lastName char(100),
+  middleName char(100),
+  PID char(100),
   FOREIGN KEY(PID) REFERENCES password(PID)
 );
 CREATE TABLE GrandeurAppt (GID char(20) primary key NOT NULL);
@@ -103,26 +103,3 @@ VALUES
     'quatre-et-demi',
     FALSE
   );
-DROP TRIGGER IF EXISTS t_appt_delete;
-GO
-  CREATE TRIGGER t_appt_delete ON appartments INSTEAD OF DELETE AS BEGIN DECLARE @AID INT;
-DECLARE @count INT;
-SELECT
-  @AID = AID
-FROM
-  DELETED;
-SELECT
-  @count = COUNT(*)
-FROM
-  appartments
-WHERE
-  AID = @AID;
-IF @SOLD = 1
-DELETE FROM
-  appartments
-WHERE
-  AID = @AID;
-  ELSE THROW 51000,
-  'can not delete - appartment isnt sold yet',
-  1;
-END;

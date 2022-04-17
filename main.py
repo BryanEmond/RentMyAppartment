@@ -26,34 +26,34 @@ mycursor = mydb.cursor()
 
 @app.route("/")
 def register():
+    sql = "SELECT * FROM appartments"
+    mycursor.execute(sql)
+    appartment = mycursor.fetchall()
     if("userIdConnecetion" not in request.cookies):
-        return render_template("index.html")
+        return render_template("index.html",APPARTMENT=appartment)
     # if there's a user send it in the html but the password shouldn't be include
     payload = jwt.decode(request.cookies.get(
         "userIdConnecetion"), os.getenv('SECRET'), algorithms="HS256")
-    sql = "SELECT name,UID FROM user where UID = %s"
+    sql = "SELECT firstName,UID FROM user where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     user = mycursor.fetchone()
     # if(user == None):
     #     resp = make_response("",200)
     #     resp.set_cookie('userIdConnecetion','',expires=0)
     #     return resp
-    return render_template("index.html", USER=user)
+    return render_template("index.html", USER=user,APPARTMENT=appartment)
 
 
 @app.route("/api/login", methods=['POST'])
 def login():
     try:
-        sql = "SELECT UID,PID FROM user where email = %s"
-        mycursor.execute(sql, request.form.get('email'))
-        result = mycursor.fetchone()
         sql = "SELECT password FROM password where PID = %s"
-        mycursor.execute(sql, result[1])
+        mycursor.execute(sql, request.form.get('email'))
         pw = mycursor.fetchone()
         # print(result[0],file=sys.stderr)
         if bcrypt.checkpw(request.form.get('password').encode('utf-8'), pw[0].encode('utf-8')):
             resp = make_response("", 200)
-            encoded = jwt.encode({"IdUser": result[0]}, os.getenv('SECRET'))
+            encoded = jwt.encode({"IdUser": request.form.get('email')}, os.getenv('SECRET'))
             resp.set_cookie('userIdConnecetion', encoded)
             return resp
     except:
@@ -66,14 +66,12 @@ def create_account():
         # print(request.form.get('name'),file=sys.stderr)
         password = bytes(request.form.get('password'), encoding='utf-8')
         hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-        base64_byte = base64.b64encode(
-            request.form.get('email').encode("ascii"))
-        base64_string = base64_byte.decode("ascii")
         sql = "INSERT INTO password VALUES (%s,%s)"
-        mycursor.execute(sql, ("PID"+base64_string[9:15], hashed))
-        sql = "INSERT INTO user VALUES (%s,%s,%s,%s)"
-        mycursor.execute(sql, ("UID"+base64_string[0:9], request.form.get(
-            'name'), request.form.get('email'), "PID"+base64_string[9:15]))
+        mycursor.execute(sql, (request.form.get('email'), hashed))
+        mydb.commit()
+        sql = "INSERT INTO user VALUES (%s,%s,%s,%s,%s)"
+        mycursor.execute(sql, (request.form.get('email'), request.form.get(
+            'name'),request.form.get('lastName'),request.form.get('middleName'), request.form.get('email')))
         mydb.commit()
         return('', 200)
     except:
@@ -102,10 +100,10 @@ def manageAd():
         return render_template("index.html")
     payload = jwt.decode(request.cookies.get(
         "userIdConnecetion"), os.getenv('SECRET'), algorithms="HS256")
-    sql = "SELECT name,UID FROM user where UID = %s"
+    sql = "SELECT firstName,UID FROM user where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     user = mycursor.fetchone()
-    sql = "SELECT * FROM appartments where UID = %s ORDER BY appartment ASC"
+    sql = "SELECT * FROM appartments where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     appartment = mycursor.fetchall()
     return render_template("manageAd.html", USER=user, APPARTMENT=appartment)

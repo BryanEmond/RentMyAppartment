@@ -22,7 +22,7 @@ $("#loginForm").submit((e) => {
 });
 $("#createAccountForm").submit((e) => {
     e.preventDefault();
-    if ($("#name").val() != "" && $("#emailReg").val() != "" && $("#passwordReg").val() != "" && $("#reEnterPassword").val() != "") {
+    if ($("#name").val() != "" && $("#lastName").val() != "" && $("#emailReg").val() != "" && $("#passwordReg").val() != "" && $("#reEnterPassword").val() != "") {
         if ($("#passwordReg").val() === $("#reEnterPassword").val()) {
             $.ajax({
                 url: '/api/create_account',
@@ -31,6 +31,8 @@ $("#createAccountForm").submit((e) => {
                     "name": $("#name").val(),
                     "email": $("#emailReg").val(),
                     "password": $("#passwordReg").val(),
+                    "middleName": $("#middleName").val(),
+                    "lastName": $("#lastName").val(),
                 },
                 success: (response, status) => {
                     $(".hideAlert").css("display", "none");

@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand">*Logo</a>
+            <a class="navbar-brand"></a>
             <!-- <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalSearch">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button> -->
@@ -24,15 +24,13 @@
                 <i class="fa-solid fa-circle-plus fa-2xl"></i>
             </button>
             {% if USER != null %}
-            <div class="btn-group dropdown">
+            <div class="btn-group dropstart">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                     aria-expanded="true">
                     <i class="fa-solid fa-user" id="marginRightSpace"></i> {{ USER[0] }}
                 </button>
                 <ul class="dropdown-menu bg-dark">
                     <!-- Dropdown menu links -->
-                    <button class="btn btn-dark" style="width: 100%;">Setting</button>
-                    <hr id="hr">
                     <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
 
                 </ul>
@@ -64,8 +62,6 @@
             </div>
             {% endfor %}
         </div>
-    </div>
-    </div>
     </div>
     <!-- Modal for the creation of an ad -->
     <div class="modal fade" id="modalCreateAd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

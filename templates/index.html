@@ -15,10 +15,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand">*Logo</a>
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalSearch">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
+            <a class="navbar-brand"></a>
             {% if USER != null %}
             <button class="btn btn-dark" id="manageAd">
                 <i class="fa-solid fa-rectangle-ad"></i>
@@ -30,8 +27,6 @@
                 </button>
                 <ul class="dropdown-menu bg-dark">
                     <!-- Dropdown menu links -->
-                    <button class="btn btn-dark" style="width: 100%;">Setting</button>
-                    <hr id="hr">
                     <button class="btn btn-dark" style="width: 100%;" id="signOut">Sign out</button>
 
                 </ul>
@@ -47,7 +42,31 @@
             {% endif %}
         </div>
     </nav>
-    <div id="map"></div>
+    <div class="container">
+        <div class="row">
+            {% for i in APPARTMENT %}
+            <div class="col-lg-4 col">
+                <div class="card margin-style" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i[0]}}</h5>
+                        <p class="card-text">{{i[2]}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{i[4]}}</li>
+                        <li class="list-group-item">{{i[1]}}$</li>
+                        <li class="list-group-item">{{i[3]}}</li>
+                        <li class="list-group-item">{{i[5]}}</li>
+                        {% if i[6] == 0 %}
+                        <li class="list-group-item">non louer</li>
+                        {% else %}
+                        <li class="list-group-item">Louer</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
     <!-- Modal for the login -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,6 +125,8 @@
                             A problem apeared during the creation of the account!
                         </div>
                         <input class="form-control" type="text" placeholder="Name" name="name" id="name">
+                        <input class="form-control margin-style" type="text" placeholder="Middle name" name="name" id="middleName">
+                        <input class="form-control margin-style" type="text" placeholder="Last name" name="name" id="lastName">
                         <input class="form-control margin-style" type="email" placeholder="Email" name="email"
                             id="emailReg">
                         <input class="form-control margin-style" type="password" placeholder="Password" name="password"
@@ -121,6 +142,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Modal for the appartment search -->
     <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
