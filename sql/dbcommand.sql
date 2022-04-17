@@ -3,52 +3,42 @@ USE rentmyappartment;
 
 
 CREATE TABLE password(PID char(9) primary key, password text);
-CREATE TABLE user(UID char(12) NOT NULL, name char(100), email char(100), PID char(12), PRIMARY KEY(UID), 
+CREATE TABLE user(UID char(100) NOT NULL, first_name char(100), last_name char(100), middle_name char(100), PID char(12), PRIMARY KEY(UID), 
                     FOREIGN KEY(PID) REFERENCES password(PID));
-CREATE TABLE GrandeurAppt (GID char(12) primary key NOT NULL, size float(2) );
-CREATE TABLE Country(countryname char(12));
-CREATE TABLE City(CID char(12), 
-                CityName VARCHAR(64), 
-                countryname char(12), 
-                PRIMARY KEY(CID), foreign key (countryname) REFERENCES Country(countryname);
+CREATE TABLE GrandeurAppt (GID char(20) primary key NOT NULL);
+CREATE TABLE Country(country_name char(12));
+CREATE TABLE City(CID char(100), 
+                country_name char(12), region char (100), arrondissement char (100), nombre_appt int,
+                PRIMARY KEY(CID), foreign key (country_name) REFERENCES Country(country_name);
 
-
-CREATE TABLE appartments( AID int NOT NULL, title char(100), address char(100), price int,
+CREATE TABLE appartments( AID char(100) NOT NULL, price int,
             description text, UID char(12) not null, PRIMARY KEY(AID), 
             CID char(12) not null, GID char(12) not null, sold BOOLEAN,
             FOREIGN KEY(UID) REFERENCES user(UID), foreign key (CID) REFERENCES city (CID),
             foreign key (GID) REFERENCES GrandeurAppt (GID));
 
 
-INSERT INTO password('001', naruto);
-INSERT INTO password('002', sasuke);
-
-INSERT INTO user('kingmufasa99', 'Mostafa Filali', 'mfilali99@hotmail.com', '001');
-INSERT INTO user('bryan', 'Bryan Emond', 'mfilali99@hotmail.com', '002');
-INSERT INTO GrandeurAppt ('un-et-demi', 1.5 );
-INSERT INTO GrandeurAppt ('deux-et-demi', 2.5 );
-INSERT INTO GrandeurAppt ('trois-et-demi', 3.5 );
-INSERT INTO GrandeurAppt ('quatre-et-demi', 4.5 );
-INSERT INTO GrandeurAppt ('cinq-et-demi', 5.5 );
-
+INSERT INTO password('001',' naruto');
+INSERT INTO password('002', 'sasuke');
+INSERT INTO user ('mfilali99@hotmail.com', 'Moulay', 'Mostafa', 'Filali', '001');
+INSERT INTO user('bryanemond@hotmail.com', 'Bryan', ' ', 'Emond', '002');
+INSERT INTO GrandeurAppt ('un-et-demi');
+INSERT INTO GrandeurAppt ('deux-et-demi');
+INSERT INTO GrandeurAppt ('trois-et-demi');
+INSERT INTO GrandeurAppt ('quatre-et-demi');
+INSERT INTO GrandeurAppt ('cinq-et-demi');
 INSERT INTO Country('Canada');
 INSERT INTO Country('USA');
-INSERT INTO City('qc', 'Ville de Québec', 'Canada');
-INSERT INTO City('trv', 'Trois-Rivières', 'Canada');
-INSERT INTO City('mtl', 'Montréal', 'Canada');
-INSERT INTO City('ny', 'New York', 'USA');
 
-INSERT INTO appartments( 001, 'Studio Lebourgneuf', 
-            '6270 rue dAlésia', 520,
-            description text, 'kingmufasa99', 
-            'qc'l, 'un-et-demi', false);
+INSERT INTO City('Quebec', 'Lebourgneuf', 'Canada');
+INSERT INTO City('Trois-Rivières', 'Canada');
+INSERT INTO City('Montréal', 'Canada');
+INSERT INTO City('New York', 'USA');
 
-
-
-
-
-
-
+INSERT INTO appartments VALUES (
+            '6270 rue dAlesia appt. 50', 520,
+            'Studio Lebourgneuf', 'mfilali99@hotmail.com', 
+            'Québec', 'un-et-demi', false), 
 
 
 DROP TRIGGER IF EXISTS t_appt_delete;
