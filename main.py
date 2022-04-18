@@ -77,6 +77,15 @@ def create_account():
     except:
         return ("", 404)
 
+@app.route("/api/CreateAd", methods=['POST'])
+def CreateAd():
+    base64_byte = base64.b64encode(request.form.get('AID').encode("ascii"))
+    base64_string = base64_byte.decode("ascii")
+    sql = "INSERT INTO appartments VALUES (%s,%s,%s,%s,%s,%s,%s)"
+    print((request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),request.form.get('town'), request.form.get('size')),file=sys.stderr)
+    mycursor.execute(sql, (request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),request.form.get('town'), request.form.get('size'),False))
+    mydb.commit()
+    return ("", 202)
 
 @app.route("/api/sign_out", methods=['POST'])
 def sign_out():
@@ -106,18 +115,13 @@ def manageAd():
     sql = "SELECT * FROM appartments where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     appartment = mycursor.fetchall()
-    return render_template("manageAd.html", USER=user, APPARTMENT=appartment)
-
-
-@app.route("/api/CreateAd", methods=['POST'])
-def CreateAd():
-    base64_byte = base64.b64encode(request.form.get('AID').encode("ascii"))
-    base64_string = base64_byte.decode("ascii")
-    sql = "INSERT INTO appartments VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    mycursor.execute(sql, ("AID"+base64_string[0:9], request.form.get('title'), request.form.get('address'), request.form.get('appartment'), request.form.get('zipCode'), request.form.get(
-        'town'), request.form.get('size'), int(request.form.get('price')), request.form.get('description'), request.form.get('coordinate'), request.form.get('UID')))
-    mydb.commit()
-    return ("", 202)
+    sql = "SELECT * FROM GrandeurAppt"
+    mycursor.execute(sql)
+    size = mycursor.fetchall()
+    sql = "SELECT * FROM City"
+    mycursor.execute(sql)
+    city = mycursor.fetchall()
+    return render_template("manageAd.html", USER=user, APPARTMENT=appartment,SIZE=size,CITY=city)
 
 
 if __name__ == "__main__":

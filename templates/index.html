@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../static/styles/mapStyle.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="../static/script/map.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/fd2ad5b0a8.js" crossorigin="anonymous"></script>
 </head>
@@ -15,12 +14,14 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand"></a>
+            <a class="navbar-brand" href="/">
+                <i class="fa-solid fa-home  fa-lg"></i>
+            </a>
             {% if USER != null %}
             <button class="btn btn-dark" id="manageAd">
-                <i class="fa-solid fa-rectangle-ad"></i>
+                <i class="fa-solid fa-rectangle-ad  fa-xl"></i>
             </button>
-            <div class="btn-group dropdown">
+            <div class="btn-group dropstart">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                     aria-expanded="true">
                     <i class="fa-solid fa-user" id="marginRightSpace"></i> {{ USER[0] }}
@@ -125,8 +126,10 @@
                             A problem apeared during the creation of the account!
                         </div>
                         <input class="form-control" type="text" placeholder="Name" name="name" id="name">
-                        <input class="form-control margin-style" type="text" placeholder="Middle name" name="name" id="middleName">
-                        <input class="form-control margin-style" type="text" placeholder="Last name" name="name" id="lastName">
+                        <input class="form-control margin-style" type="text" placeholder="Middle name" name="name"
+                            id="middleName">
+                        <input class="form-control margin-style" type="text" placeholder="Last name" name="name"
+                            id="lastName">
                         <input class="form-control margin-style" type="email" placeholder="Email" name="email"
                             id="emailReg">
                         <input class="form-control margin-style" type="password" placeholder="Password" name="password"
@@ -142,7 +145,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Modal for the appartment search -->
     <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -177,9 +180,6 @@
 
     <!-- JQuery / map api/ login Script -->
     <script src="../static/script/apiRequest.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJJejr2yv6n8PoEDwq_hw7Pnr9Z24BWRM&callback=initMap&libraries=&v=weekly"
-        async></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

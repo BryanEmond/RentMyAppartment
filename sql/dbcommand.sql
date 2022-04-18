@@ -55,33 +55,17 @@ VALUES(
     'Emond',
     '002'
   );
-INSERT INTO
-  GrandeurAppt
-VALUES('un-et-demi');
-INSERT INTO
-  GrandeurAppt
-VALUES('deux-et-demi');
-INSERT INTO
-  GrandeurAppt
-VALUES('trois-et-demi');
-INSERT INTO
-  GrandeurAppt
-VALUES('quatre-et-demi');
+INSERT INTO GrandeurAppt VALUES('un-et-demi');
+INSERT INTO GrandeurAppt VALUES('deux-et-demi');
+INSERT INTO GrandeurAppt VALUES('trois-et-demi');
+INSERT INTO GrandeurAppt VALUES('quatre-et-demi');
 INSERT INTO
   GrandeurAppt
 VALUES('cinq-et-demi');
-INSERT INTO
-  Country
-VALUES('Canada');
-INSERT INTO
-  Country
-VALUES('USA');
-INSERT INTO
-  City
-VALUES('Quebec', 'Canada');
-INSERT INTO
-  City
-VALUES('Montréal', 'Canada');
+INSERT INTO Country VALUES('Canada');
+INSERT INTO Country VALUES('USA');
+INSERT INTO City VALUES ('Québec', 'Canada'),('Montréal', 'Canada'),('Mont-tremblant', 'Canada'),('Saint-Jérome', 'Canada'),('Laval', 'Canada'),('lévis', 'Canada'),('Rouyn-norando', 'Canada');
+INSERT INTO City VALUES ("New-York","USA"),("Austin","USA"),("Houston","USA"),("Washington","USA"),("Los Angeles","USA"),("Floride","USA");
 INSERT INTO
   appartments
 VALUES

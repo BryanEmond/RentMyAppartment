@@ -84,5 +84,21 @@ $("#manageAd").click((e) => {
 
 $("#createAdForm").submit((e) => {
     e.preventDefault();
-    geocode({ address: $("#address").val() +" "+ $("#town").val() +" "+ $("#zipCode").val()});
+
+    $.ajax({
+        url: '/api/CreateAd',
+        type: 'post',
+        data: {
+            "UID": USERConst,
+            "town": $("#town").val(),
+            "size": $("#size").val(),
+            "description": $("#description").val(),
+            "AID": $("#address").val(),
+            "price": $("#price").val(),
+
+        },
+        success: (response) => {
+            location.reload();
+        }
+    })
 })

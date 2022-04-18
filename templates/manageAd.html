@@ -15,10 +15,9 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand"></a>
-            <!-- <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalSearch">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button> -->
+            <a class="navbar-brand" href="/">
+                <i class="fa-solid fa-home  fa-lg"></i>
+            </a>
             <button type="button" class="btn btn-dark" id="addAdbtn" data-bs-toggle="modal"
                 data-bs-target="#modalCreateAd">
                 <i class="fa-solid fa-circle-plus fa-2xl"></i>
@@ -44,20 +43,21 @@
             {% for i in APPARTMENT %}
             <div class="col-lg-4 col">
                 <div class="card margin-style" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{i[1]}}</h5>
-                        <p class="card-text">{{i[8]}}</p>
+                        <h5 class="card-title">{{i[0]}}</h5>
+                        <p class="card-text">{{i[2]}}</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{i[2] + " app." + i[3]}}</li>
-                        <li class="list-group-item">{{i[6]}}</li>
+                        <li class="list-group-item">{{i[4]}}</li>
+                        <li class="list-group-item">{{i[1]}}$</li>
+                        <li class="list-group-item">{{i[3]}}</li>
                         <li class="list-group-item">{{i[5]}}</li>
+                        {% if i[6] == 0 %}
+                        <li class="list-group-item">non louer</li>
+                        {% else %}
+                        <li class="list-group-item">Louer</li>
+                        {% endif %}
                     </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -73,17 +73,16 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input class="form-control margin-style" type="text" placeholder="Title" id="title">
                         <input class="form-control margin-style" type="text" placeholder="Address" id="address">
-                        <input class="form-control margin-style" type="text" placeholder="Appartment number"
-                            id="appartment">
-                        <input class="form-control margin-style" type="text" placeholder="Zip code" id="zipCode">
-                        <input class="form-control margin-style" type="text" placeholder="Town" id="town">
+                        <select class="form-select margin-style" aria-label="Default select example" id="town">
+                            {% for i in CITY %}
+                            <option value={{i[0]}}>{{i[0]}}</option>
+                            {% endfor %}
+                        </select>
                         <select class="form-select margin-style" aria-label="Default select example" id="size">
-                            <option selected value="">Size</option>
-                            <option value="1 1/2">1 1/2</option>
-                            <option value="2 1/2">2 1/2</option>
-                            <option value="3 1/2">3 1/2</option>
+                            {% for i in SIZE[::-1] %}
+                            <option value={{i[0]}}>{{i[0]}}</option>
+                            {% endfor %}
                         </select>
                         <textarea class="form-control margin-style" type="text" placeholder="Description" Town
                             id="description"></textarea>
@@ -91,7 +90,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" type="submit">Create account</button>
+                        <button class="btn btn-primary" type="submit">Create ad</button>
                     </div>
                 </form>
             </div>
@@ -100,18 +99,15 @@
     {% if USER != null %}
     <script>
         const USERConst = '{{ USER[1] }}';
-        console.log('{{APPARTMENT}}')
+        // console.log('{{APPARTMENT}}')
+        // console.log('{{SIZE}}')
     </script>
     {% endif %}
     <!-- JQuery / map api/ login Script -->
     <script src="../static/script/apiRequest.js"></script>
-    <script src="../static/script/initMapAd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJJejr2yv6n8PoEDwq_hw7Pnr9Z24BWRM&callback=initMap&libraries=&v=weekly"
-        async></script>
 </body>
 
 </html>
