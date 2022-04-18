@@ -1,13 +1,13 @@
 CREATE DATABASE rentmyappartment;
 USE rentmyappartment;
-CREATE TABLE password(PID char(100) primary key, password text);
+CREATE TABLE password(PID INT AUTO_INCREMENT NOT NULL primary key, password text);
 CREATE TABLE user(
   UID char(100) NOT NULL,
   PRIMARY KEY(UID),
   firstName char(100),
   lastName char(100),
   middleName char(100),
-  PID char(100),
+  PID  INT,
   FOREIGN KEY(PID) REFERENCES password(PID)
 );
 CREATE TABLE GrandeurAppt (GID char(20) primary key NOT NULL);
@@ -38,11 +38,11 @@ CREATE TABLE appartments(
   FOREIGN KEY(LID) REFERENCES localisation (LID)
 );
 INSERT INTO
-  password
-VALUES('001', ' naruto');
+  password (password)
+VALUES(' naruto');
 INSERT INTO
-  password
-VALUES('002', 'sasuke');
+  password (password)
+VALUES('sasuke');
 INSERT INTO
   user
 VALUES(
@@ -50,7 +50,7 @@ VALUES(
     'Moulay',
     'Mostafa',
     'Filali',
-    '001'
+    1
   );
 INSERT INTO
   user
@@ -59,7 +59,7 @@ VALUES(
     'Bryan',
     ' ',
     'Emond',
-    '002'
+    2
   );
 INSERT INTO GrandeurAppt VALUES('un-et-demi');
 INSERT INTO GrandeurAppt VALUES('deux-et-demi');
