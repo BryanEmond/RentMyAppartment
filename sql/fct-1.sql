@@ -29,7 +29,13 @@ BEGIN
     SET var_password = (  SELECT password FROM password WHERE PID = var_pid );
     RETURN var_password;
 END// 
+
+CREATE TRIGGER update_qty BEFORE UPDATE ON appartments
+    BEGIN
+        UPDATE nbAppartement;
+            SET nbAppartement = nbAppartement - 1;
+END//
+
+
 delimiter ;
-
-
 
