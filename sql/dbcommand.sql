@@ -70,28 +70,39 @@ INSERT INTO
 VALUES('cinq-et-demi');
 INSERT INTO Country VALUES('Canada');
 INSERT INTO Country VALUES('USA');
-INSERT INTO City VALUES ('Québec'),('Montréal'),('Mont-tremblant'),('Saint-Jérome'),('Laval'),('lévis'),('Rouyn-norando');
-INSERT INTO City VALUES ("New-York"),("Austin"),("Houston"),("Washington"),("Los Angeles"),("Floride");
+INSERT INTO City VALUES ('Québec'),('Montréal'),('Mont-tremblant'),('Saint-Jérome'),('Laval'),('Lévis'),('Rouyn-noranda');
+INSERT INTO City VALUES ("New-York"),("Austin"),("Houston"),("Los Angeles"),("Miami");
 
-INSERT INTO localisation(CID, countryName, states, nbAppartement) VALUES ('Québec',"Canada","Québec",0);
--- INSERT INTO
---   appartments
--- VALUES
---   (
---     '6270 rue dAlesia appt. 50',
---     520,
---     'Studio meublé',
---     'mfilali99@hotmail.com',
---     'Quebec',
---     'quatre-et-demi',
---     FALSE
---   ),
---   (
---     '6268 rue dAlesia appt. 48',
---     800,
---     'Appartement meublé 2 chambres',
---     'mfilali99@hotmail.com',
---     'Quebec',
---     'quatre-et-demi',
---     FALSE
---   );
+INSERT INTO localisation(CID, countryName, states, nbAppartement) VALUES ('Québec',"Canada","Québec",0),
+ ('Montréal',"Canada","Québec",0),
+ ('Mont-tremblant',"Canada","Québec",0),
+ ('Saint-Jérome',"Canada","Québec",0),
+ ('Laval',"Canada","Québec",0),
+ ('Lévis',"Canada","Québec",0),
+ ('Rouyn-noranda',"Canada","Québec",0),
+ ('New-York',"USA","Jersey",0),
+ ("Austin","USA","Texas",0),
+ ("Houston","USA","Texas",0),
+ ("Miami","USA","Florida",0),
+ ("Los Angeles","USA","California",0);
+INSERT INTO
+  appartments
+VALUES
+  (
+    '6270 rue dAlesia appt. 50',
+    520,
+    'Studio meublé',
+    'mfilali99@hotmail.com',
+    1,
+    'quatre-et-demi',
+    FALSE
+  ),
+  (
+    '6268 rue dAlesia appt. 48',
+    800,
+    'Appartement meublé 2 chambres',
+    'mfilali99@hotmail.com',
+    1,
+    'quatre-et-demi',
+    FALSE
+  );
