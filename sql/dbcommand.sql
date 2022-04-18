@@ -38,8 +38,13 @@ CREATE TABLE appartments(
   FOREIGN KEY(LID) REFERENCES localisation (LID)
 );
 INSERT INTO
+<<<<<<< HEAD
   password (password)
 VALUES(' naruto');
+=======
+  password
+VALUES('001', 'naruto');
+>>>>>>> 59b49790aab09b5879956000de54616c9d5e1a3d
 INSERT INTO
   password (password)
 VALUES('sasuke');
