@@ -65,7 +65,7 @@ VALUES('cinq-et-demi');
 INSERT INTO Country VALUES('Canada');
 INSERT INTO Country VALUES('USA');
 INSERT INTO City VALUES ('Québec', 'Canada'),('Montréal', 'Canada'),('Mont-tremblant', 'Canada'),('Saint-Jérome', 'Canada'),('Laval', 'Canada'),('lévis', 'Canada'),('Rouyn-norando', 'Canada');
-INSERT INTO City VALUES ("New-York","USA"),("Austin","USA"),("Houston","USA"),("Washington","USA"),("Los Angeles","USA"),("Floride","USA");
+INSERT INTO City VALUES ("New-York","USA"),("Austin","USA"),("Houston","USA"),("Washington","USA"),("Los Angeles","USA"),("Miami","USA");
 INSERT INTO
   appartments
 VALUES
@@ -79,7 +79,7 @@ VALUES
     FALSE
   ),
   (
-    '6268 rue dAlesia appt. 48',
+    '506 rue des Brumes appt. 48',
     800,
     'Appartement meublé 2 chambres',
     'mfilali99@hotmail.com',
