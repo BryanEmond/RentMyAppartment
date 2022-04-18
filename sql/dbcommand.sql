@@ -39,7 +39,7 @@ CREATE TABLE appartments(
 );
 INSERT INTO
   password
-VALUES('001', ' naruto');
+VALUES('001', 'naruto');
 INSERT INTO
   password
 VALUES('002', 'sasuke');
