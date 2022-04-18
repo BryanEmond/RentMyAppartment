@@ -1,24 +1,16 @@
  delimiter //
-    create PROCEDURE new_account
-    (
-    EMAIL char(100) NOT NULL,
-    firstName char(100) NOT NULL,
-    lastName char(100)NOT NULL,
-    middleName char(100),
-    PASSWORD1 char(100)NOT NULL
-    )
-begin
-    insert into password values (EMAIL, PASSWORD1)
-end //
-delimiter ;
+    CREATE PROCEDURE new_account
+    (EMAIL char,firstName char,lastName char,middleName char,PASSWORD1 char)
+BEGIN
+    insert into password values (EMAIL, PASSWORD1);
+    insert INTO user VALUES (EMAIL, firstName, lastName, middleName, EMAIL);
 
-delimiter //
+END //
 
-create FUNCTION selection_appt_grandeur RETURNS VARCHAR
-begin
+CREATE PROCEDURE selection_appt_grandeur()
+BEGIN
 
-SELECT * INTO size FROM GrandeurAppt;
-    RETURN size;
+    SELECT * FROM GrandeurAppt;
 
 END //
 delimiter ;
