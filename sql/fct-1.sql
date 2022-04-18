@@ -1,4 +1,11 @@
- delimiter //
+CREATE INDEX indexMDP ON password(PID) USING HASH;
+CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) USING HASH;
+CREATE INDEX indexUser ON user(UID) USING HASH;
+CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD, description text) USING HASH;
+
+
+delimiter //
+
     CREATE PROCEDURE new_account
     (EMAIL char,firstName char,lastName char,middleName char,PASSWORD1 char)
 BEGIN
@@ -23,3 +30,6 @@ BEGIN
     RETURN var_password;
 END// 
 delimiter ;
+
+
+
