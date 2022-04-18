@@ -12,24 +12,30 @@ CREATE TABLE user(
 );
 CREATE TABLE GrandeurAppt (GID char(20) primary key NOT NULL);
 CREATE TABLE Country(countryName char(100) PRIMARY KEY);
-CREATE TABLE City(
-  CID char(100) NOT NULL,
-  countryName char(12),
-  PRIMARY KEY(CID),
-  FOREIGN KEY(countryName) REFERENCES Country(countryName)
+CREATE TABLE City(CID char(100) NOT NULL,PRIMARY KEY(CID));
+
+CREATE TABLE localisation(
+  LID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  CID CHAR(100) NOT NULL,
+  countryName CHAR(100) NOT NULL,
+  states CHAR(100) NOT NULL,
+  nbAppartement INT,
+  FOREIGN KEY(countryName) REFERENCES Country(countryName),
+  FOREIGN KEY(CID) REFERENCES city (CID)
 );
+
 CREATE TABLE appartments(
   AID char(100) NOT NULL,
   PRIMARY KEY(AID),
   price int,
   description text,
   UID char(100) not null,
-  CID char(100) not null,
+  LID INT AUTO_INCREMENT NOT NULL,
   GID char(100) not null,
   SOLD BOOLEAN,
   FOREIGN KEY(UID) REFERENCES user(UID),
-  foreign key (CID) REFERENCES city (CID),
-  foreign key (GID) REFERENCES GrandeurAppt (GID)
+  foreign key (GID) REFERENCES GrandeurAppt (GID),
+  FOREIGN KEY(LID) REFERENCES localisation (LID)
 );
 INSERT INTO
   password
@@ -64,26 +70,28 @@ INSERT INTO
 VALUES('cinq-et-demi');
 INSERT INTO Country VALUES('Canada');
 INSERT INTO Country VALUES('USA');
-INSERT INTO City VALUES ('Québec', 'Canada'),('Montréal', 'Canada'),('Mont-tremblant', 'Canada'),('Saint-Jérome', 'Canada'),('Laval', 'Canada'),('lévis', 'Canada'),('Rouyn-norando', 'Canada');
-INSERT INTO City VALUES ("New-York","USA"),("Austin","USA"),("Houston","USA"),("Washington","USA"),("Los Angeles","USA"),("Floride","USA");
-INSERT INTO
-  appartments
-VALUES
-  (
-    '6270 rue dAlesia appt. 50',
-    520,
-    'Studio meublé',
-    'mfilali99@hotmail.com',
-    'Quebec',
-    'quatre-et-demi',
-    FALSE
-  ),
-  (
-    '6268 rue dAlesia appt. 48',
-    800,
-    'Appartement meublé 2 chambres',
-    'mfilali99@hotmail.com',
-    'Quebec',
-    'quatre-et-demi',
-    FALSE
-  );
+INSERT INTO City VALUES ('Québec'),('Montréal'),('Mont-tremblant'),('Saint-Jérome'),('Laval'),('lévis'),('Rouyn-norando');
+INSERT INTO City VALUES ("New-York"),("Austin"),("Houston"),("Washington"),("Los Angeles"),("Floride");
+
+INSERT INTO localisation(CID, countryName, states, nbAppartement) VALUES ('Québec',"Canada","Québec",0);
+-- INSERT INTO
+--   appartments
+-- VALUES
+--   (
+--     '6270 rue dAlesia appt. 50',
+--     520,
+--     'Studio meublé',
+--     'mfilali99@hotmail.com',
+--     'Quebec',
+--     'quatre-et-demi',
+--     FALSE
+--   ),
+--   (
+--     '6268 rue dAlesia appt. 48',
+--     800,
+--     'Appartement meublé 2 chambres',
+--     'mfilali99@hotmail.com',
+--     'Quebec',
+--     'quatre-et-demi',
+--     FALSE
+--   );
