@@ -1,4 +1,7 @@
 CREATE DATABASE rentmyappartment;
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'shorty';
+
 USE rentmyappartment;
 CREATE TABLE password(PID INT AUTO_INCREMENT NOT NULL primary key, password text);
 CREATE TABLE user(
@@ -33,7 +36,7 @@ CREATE TABLE appartments(
   LID INT AUTO_INCREMENT NOT NULL,
   GID char(100) not null,
   SOLD BOOLEAN,
-  FOREIGN KEY(UID) REFERENCES user(UID),
+  FOREIGN KEY (UID) REFERENCES user(UID),
   foreign key (GID) REFERENCES GrandeurAppt (GID),
   FOREIGN KEY(LID) REFERENCES localisation (LID)
 );

@@ -1,7 +1,7 @@
-CREATE INDEX indexMDP ON password(PID) USING HASH;
-CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) USING HASH;
-CREATE INDEX indexUser ON user(UID) USING HASH;
-CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD, description text) USING HASH;
+CREATE INDEX indexMDP ON password(PID) USING BTREE;
+CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) USING BTREE;
+CREATE INDEX indexUser ON user(UID) USING BTREE;
+CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD, description text) USING BTREE;
 
 
 delimiter //
@@ -30,10 +30,12 @@ BEGIN
     RETURN var_password;
 END// 
 
-CREATE TRIGGER update_qty BEFORE UPDATE ON appartments
+CREATE TRIGGER update_qty AFTER INSERT ON appartments 
+    FOR EACH ROW
     BEGIN
         UPDATE nbAppartement;
-            SET nbAppartement = nbAppartement - 1;
+        SET nbAppartement = nbAppartement + 1;
+        WHERE 
 END//
 
 
