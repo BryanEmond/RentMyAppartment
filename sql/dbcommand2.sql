@@ -15,6 +15,26 @@ BEGIN
     insert INTO user VALUES (EMAIL, firstName, lastName, middleName, var_PID);
 END //
 
+CREATE PROCEDURE selection_appartment
+    (AID text,LOC INT,SIZE text,MINP INT,MAXP INT)
+BEGIN
+    IF MAXP > 0 AND SIZE <> "0" AND LOC > 0 THEN
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID, '%') AND LID = LOC AND GID = SIZE AND price >= MINP AND price <= MAXP);
+    ELSEIF MAXP > 0 AND SIZE <> "0" THEN
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND GID = SIZE AND price >= MINP AND price <= MAXP);
+    ELSEIF MAXP > 0 AND LOC > 0 THEN
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND LID = LOC AND price >= MINP AND price <= MAXP);
+    ELSEIF MAXP > 0 THEN
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND price >= MINP AND price <= MAXP);
+    ELSEIF SIZE <> "0" THEN
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND GID = SIZE AND price >= MINP);
+    ELSEIF LOC > 0 THEN
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND LID = LOC AND price >= MINP);
+    ELSE
+      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND price >= MINP);
+    END IF;
+END //
+
 CREATE PROCEDURE selection_appt_grandeur()
 BEGIN
 
@@ -66,5 +86,14 @@ VALUES
     'mfilali99@hotmail.com',
     2,
     'quatre-et-demi',
+    FALSE
+  ),
+  (
+    '123 rue label',
+    530,
+    'Appartement meublé 2 chambres',
+    'mfilali99@hotmail.com',
+    4,
+    'un-et-demi',
     FALSE
   );

@@ -163,11 +163,13 @@
                         <input class="form-control margin-style" type="number" placeholder="Minimum price" id="minPrice">
                         <input class="form-control margin-style" type="number" placeholder="Maximum price" id="maxPrice">
                         <select class="form-select margin-style" aria-label="Default select example" id="searchTown">
+                            <option value="0">Aucun</option>
                             {% for i in LOCS %}
                             <option value={{i[0]}}>{{i[1]}},{{i[2]}},{{i[3]}}</option>
                             {% endfor %}
                         </select>
                         <select class="form-select margin-style" aria-label="Default select example" id="searchSize">
+                            <option value="0">Aucun</option>
                             {% for i in SIZE[::-1] %}
                             <option value={{i[0]}}>{{i[0]}}</option>
                             {% endfor %}

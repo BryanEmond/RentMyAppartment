@@ -110,12 +110,12 @@ def searchAppartment():
 
 @app.route("/search")
 def search():
-    params=[request.args.get("AID"),request.args.get("loc"),request.args.get("size"),request.args.get("minP"),request.args.get("maxP")]
+    params=[request.args.get("AID"),request.args.get("loc", default=0, type=int),request.args.get("size"),request.args.get("minP", default=0, type=int),request.args.get("maxP", default=0, type=int)]
     print(params,file=sys.stderr)
     mycursor.callproc("selection_appt_grandeur")
     size = mycursor.fetchall()
-    sql = "SELECT * FROM appartments WHERE price=%s ORDER BY LID"
-    mycursor.execute(sql,520)
+    print(params,file=sys.stderr)
+    mycursor.callproc("selection_appartment",(params[0],params[1],params[2],params[3],params[4]))
     appartment = mycursor.fetchall()
     sql = "SELECT * FROM localisation"
     mycursor.execute(sql)
