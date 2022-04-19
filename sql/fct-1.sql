@@ -31,7 +31,7 @@ BEGIN
     RETURN var_password;
 END// 
 
-CREATE TRIGGER update_qty AFTER INSERT ON appartments 
+CREATE TRIGGER update_qty AFTER INSERT ON appartments
     FOR EACH ROW
     BEGIN
         UPDATE localisation
