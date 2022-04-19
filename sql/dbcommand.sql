@@ -1,7 +1,4 @@
 CREATE DATABASE rentmyappartment;
-
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'shorty';
-
 USE rentmyappartment;
 CREATE TABLE password(PID INT AUTO_INCREMENT NOT NULL primary key, password text);
 CREATE TABLE user(
@@ -88,24 +85,3 @@ INSERT INTO localisation(CID, countryName, states, nbAppartement) VALUES ('Québ
  ("Houston","USA","Texas",0),
  ("Miami","USA","Florida",0),
  ("Los Angeles","USA","California",0);
-INSERT INTO
-  appartments
-VALUES
-  (
-    '6270 rue dAlesia appt. 50',
-    520,
-    'Studio meublé',
-    'mfilali99@hotmail.com',
-    1,
-    'quatre-et-demi',
-    FALSE
-  ),
-  (
-    '6268 rue dAlesia appt. 48',
-    800,
-    'Appartement meublé 2 chambres',
-    'mfilali99@hotmail.com',
-    1,
-    'quatre-et-demi',
-    FALSE
-  );

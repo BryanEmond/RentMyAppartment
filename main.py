@@ -26,7 +26,7 @@ mycursor = mydb.cursor()
 
 @app.route("/")
 def register():
-    sql = "SELECT * FROM appartments"
+    sql = "SELECT * FROM appartments ORDER BY LID"
     mycursor.execute(sql)
     appartment = mycursor.fetchall()
     sql = "SELECT * FROM localisation"
