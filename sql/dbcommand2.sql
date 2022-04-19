@@ -31,13 +31,40 @@ BEGIN
     RETURN var_password;
 END// 
 
-CREATE TRIGGER update_qty AFTER INSERT ON appartments
-    FOR EACH ROW
-    BEGIN
-        UPDATE localisation
-        SET nbAppartement = nbAppartement + 1
-        WHERE appartments.LID = localisation.LID;
+CREATE TRIGGER update_qty AFTER INSERT ON appartments 
+FOR EACH ROW
+BEGIN
+    UPDATE localisation SET nbAppartement = nbAppartement + 1 WHERE LID = NEW.LID;
 END//
 
 delimiter ;
 
+INSERT INTO
+  appartments
+VALUES
+  (
+    '6270 rue dAlesia appt. 50',
+    520,
+    'Studio meublé',
+    'mfilali99@hotmail.com',
+    1,
+    'quatre-et-demi',
+    FALSE
+  ),
+  (
+    '6268 rue dAlesia appt. 48',
+    800,
+    'Appartement meublé 2 chambres',
+    'mfilali99@hotmail.com',
+    1,
+    'quatre-et-demi',
+    FALSE
+  ),(
+    '6268 rue dAlesia appt. 38',
+    800,
+    'Appartement meublé 2 chambres',
+    'mfilali99@hotmail.com',
+    2,
+    'quatre-et-demi',
+    FALSE
+  );
