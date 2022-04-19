@@ -1,17 +1,18 @@
-CREATE INDEX indexMDP ON password(PID) USING BTREE;
-CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) USING BTREE;
-CREATE INDEX indexUser ON user(UID) USING BTREE;
-CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD, description text) USING BTREE;
+-- CREATE INDEX indexMDP ON password(PID) USING HASH;
+-- CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) USING HASH;
+-- CREATE INDEX indexUser ON user(UID) USING HASH;
+-- CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD, description text) USING HASH;
 
 
 delimiter //
 
     CREATE PROCEDURE new_account
-    (EMAIL char,firstName char,lastName char,middleName char,PASSWORD1 char)
+    (EMAIL text,firstName text,lastName text,middleName text,PASSWORD1 text)
 BEGIN
-    insert into password values (EMAIL, PASSWORD1);
-    insert INTO user VALUES (EMAIL, firstName, lastName, middleName, EMAIL);
-
+    DECLARE var_PID INT;
+    insert into password(password) values (PASSWORD1);
+    set var_PID = (SELECT PID from password WHERE password = PASSWORD1);
+    insert INTO user VALUES (EMAIL, firstName, lastName, middleName, var_PID);
 END //
 
 CREATE PROCEDURE selection_appt_grandeur()
@@ -37,7 +38,6 @@ CREATE TRIGGER update_qty AFTER INSERT ON appartments
         SET nbAppartement = nbAppartement + 1;
         WHERE 
 END//
-
 
 delimiter ;
 
