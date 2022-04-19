@@ -29,28 +29,27 @@ def register():
     sql = "SELECT * FROM appartments"
     mycursor.execute(sql)
     appartment = mycursor.fetchall()
+    sql = "SELECT * FROM localisation"
+    mycursor.execute(sql)
+    localisation = mycursor.fetchall()
     if("userIdConnecetion" not in request.cookies):
-        return render_template("index.html",APPARTMENT=appartment)
+        return render_template("index.html",APPARTMENT=appartment,LOCS=localisation)
     # if there's a user send it in the html but the password shouldn't be include
     payload = jwt.decode(request.cookies.get(
         "userIdConnecetion"), os.getenv('SECRET'), algorithms="HS256")
     sql = "SELECT firstName,UID FROM user where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     user = mycursor.fetchone()
-    # if(user == None):
-    #     resp = make_response("",200)
-    #     resp.set_cookie('userIdConnecetion','',expires=0)
-    #     return resp
-    return render_template("index.html", USER=user,APPARTMENT=appartment)
+    
+    return render_template("index.html", USER=user,APPARTMENT=appartment,LOCS=localisation)
 
 
 @app.route("/api/login", methods=['POST'])
 def login():
     try:
-        sql = "SELECT password FROM password where PID = %s"
+        sql = "SELECT select_user(%s)"
         mycursor.execute(sql, request.form.get('email'))
         pw = mycursor.fetchone()
-        # print(result[0],file=sys.stderr)
         if bcrypt.checkpw(request.form.get('password').encode('utf-8'), pw[0].encode('utf-8')):
             resp = make_response("", 200)
             encoded = jwt.encode({"IdUser": request.form.get('email')}, os.getenv('SECRET'))
@@ -66,12 +65,8 @@ def create_account():
         # print(request.form.get('name'),file=sys.stderr)
         password = bytes(request.form.get('password'), encoding='utf-8')
         hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-        sql = "INSERT INTO password VALUES (%s,%s)"
-        mycursor.execute(sql, (request.form.get('email'), hashed))
-        mydb.commit()
-        sql = "INSERT INTO user VALUES (%s,%s,%s,%s,%s)"
-        mycursor.execute(sql, (request.form.get('email'), request.form.get(
-            'name'),request.form.get('lastName'),request.form.get('middleName'), request.form.get('email')))
+        sql = "CALL new_account(%s,%s,%s,%s,%s)"
+        mycursor.callproc("new_account",(request.form.get('email'), request.form.get('name'),request.form.get('lastName'),request.form.get('middleName'),hashed))
         mydb.commit()
         return('', 200)
     except:
@@ -83,7 +78,7 @@ def CreateAd():
     base64_string = base64_byte.decode("ascii")
     sql = "INSERT INTO appartments VALUES (%s,%s,%s,%s,%s,%s,%s)"
     print((request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),request.form.get('town'), request.form.get('size')),file=sys.stderr)
-    mycursor.execute(sql, (request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),request.form.get('town'), request.form.get('size'),False))
+    mycursor.execute(sql, (request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),int(request.form.get('town')), request.form.get('size'),False))
     mydb.commit()
     return ("", 202)
 
@@ -115,13 +110,12 @@ def manageAd():
     sql = "SELECT * FROM appartments where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     appartment = mycursor.fetchall()
-    sql = "SELECT * FROM GrandeurAppt"
-    mycursor.execute(sql)
+    mycursor.callproc("selection_appt_grandeur")
     size = mycursor.fetchall()
-    sql = "SELECT * FROM City"
+    sql = "SELECT * FROM localisation"
     mycursor.execute(sql)
-    city = mycursor.fetchall()
-    return render_template("manageAd.html", USER=user, APPARTMENT=appartment,SIZE=size,CITY=city)
+    localisation = mycursor.fetchall()
+    return render_template("manageAd.html", USER=user, APPARTMENT=appartment,SIZE=size,LOCS=localisation)
 
 
 if __name__ == "__main__":
