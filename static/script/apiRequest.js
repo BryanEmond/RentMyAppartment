@@ -84,7 +84,6 @@ $("#manageAd").click((e) => {
 
 $("#createAdForm").submit((e) => {
     e.preventDefault();
-
     $.ajax({
         url: '/api/CreateAd',
         type: 'post',
@@ -101,4 +100,39 @@ $("#createAdForm").submit((e) => {
             location.reload();
         }
     })
-})
+});
+
+function doFunction(app){
+    console.log(app)
+    $.ajax({
+        url: '/api/deleteAppartment',
+        type: 'post',
+        data: {
+            "AID": app
+
+        },
+        success: (response) => {
+            location.reload();
+        }
+    })
+}
+
+$("#SearchApp").submit((e) => {
+    e.preventDefault();
+    $.ajax({
+        url: '/api/searchAppartment',
+        type: 'post',
+        data: {
+            "UID": USERConst,
+            "town": $("#searchTown").val(),
+            "size": $("#searchSize").val(),
+            "AID": $("#searchAddress").val(),
+            "minPrice": $("#minPrice").val(),
+            "maxPrice": $("#maxPrice").val(),
+
+        },
+        success: (response) => {
+            location.href = response.redirect + "?AID="+response.message.AID+"&loc="+response.message.town+ "&size="+response.message.size+ "&minP="+response.message.minPrice+ "&maxP="+response.message.maxPrice
+        }
+    })
+});
