@@ -1,3 +1,4 @@
+from email import message
 from flask import Flask, jsonify, make_response, request, redirect, render_template, url_for
 from dotenv import load_dotenv
 # from flask_cors import CORS
@@ -26,6 +27,8 @@ mycursor = mydb.cursor()
 
 @app.route("/")
 def register():
+    mycursor.callproc("selection_appt_grandeur")
+    size = mycursor.fetchall()
     sql = "SELECT * FROM appartments ORDER BY LID"
     mycursor.execute(sql)
     appartment = mycursor.fetchall()
@@ -33,15 +36,14 @@ def register():
     mycursor.execute(sql)
     localisation = mycursor.fetchall()
     if("userIdConnecetion" not in request.cookies):
-        return render_template("index.html",APPARTMENT=appartment,LOCS=localisation)
-    # if there's a user send it in the html but the password shouldn't be include
+        return render_template("index.html",APPARTMENT=appartment,SIZE=size,LOCS=localisation)
     payload = jwt.decode(request.cookies.get(
         "userIdConnecetion"), os.getenv('SECRET'), algorithms="HS256")
     sql = "SELECT firstName,UID FROM user where UID = %s"
     mycursor.execute(sql, payload["IdUser"])
     user = mycursor.fetchone()
     
-    return render_template("index.html", USER=user,APPARTMENT=appartment,LOCS=localisation)
+    return render_template("index.html", USER=user,APPARTMENT=appartment,SIZE=size,LOCS=localisation)
 
 
 @app.route("/api/login", methods=['POST'])
@@ -77,7 +79,6 @@ def CreateAd():
     base64_byte = base64.b64encode(request.form.get('AID').encode("ascii"))
     base64_string = base64_byte.decode("ascii")
     sql = "INSERT INTO appartments VALUES (%s,%s,%s,%s,%s,%s,%s)"
-    print((request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),request.form.get('town'), request.form.get('size')),file=sys.stderr)
     mycursor.execute(sql, (request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),int(request.form.get('town')), request.form.get('size'),False))
     mydb.commit()
     return ("", 202)
@@ -97,6 +98,47 @@ def redirectToAdManager():
         jsonify({"redirect": "/manageAd"}), request.form.get('UID'))
     return resp
 
+@app.route("/api/searchAppartment", methods=['POST'])
+def searchAppartment():
+    # print(request.form,file=sys.stderr)
+    try :
+        resp = make_response(
+        jsonify({"redirect": "/search","message":request.form}))
+        return resp
+    except:
+        return ("", 404)
+
+@app.route("/search")
+def search():
+    params=[request.args.get("AID"),request.args.get("loc"),request.args.get("size"),request.args.get("minP"),request.args.get("maxP")]
+    print(params,file=sys.stderr)
+    mycursor.callproc("selection_appt_grandeur")
+    size = mycursor.fetchall()
+    sql = "SELECT * FROM appartments WHERE price=%s ORDER BY LID"
+    mycursor.execute(sql,520)
+    appartment = mycursor.fetchall()
+    sql = "SELECT * FROM localisation"
+    mycursor.execute(sql)
+    localisation = mycursor.fetchall()
+    if("userIdConnecetion" not in request.cookies):
+        return render_template("search.html",APPARTMENT=appartment,SIZE=size,LOCS=localisation)
+    payload = jwt.decode(request.cookies.get(
+        "userIdConnecetion"), os.getenv('SECRET'), algorithms="HS256")
+    sql = "SELECT firstName,UID FROM user where UID = %s"
+    mycursor.execute(sql, payload["IdUser"])
+    user = mycursor.fetchone()
+    return render_template("search.html",USER=user,APPARTMENT=appartment,SIZE=size,LOCS=localisation)
+    
+
+@app.route("/api/deleteAppartment", methods=['POST'])
+def deleteAppatment():
+    try :
+        sql = "DELETE FROM appartments WHERE AID = %s"
+        mycursor.execute(sql,request.form.get('AID') )
+        mydb.commit()
+        return ("", 202)
+    except:
+        return ("", 404)
 
 @app.route("/manageAd")
 def manageAd():
@@ -116,7 +158,6 @@ def manageAd():
     mycursor.execute(sql)
     localisation = mycursor.fetchall()
     return render_template("manageAd.html", USER=user, APPARTMENT=appartment,SIZE=size,LOCS=localisation)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

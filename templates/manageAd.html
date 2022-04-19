@@ -42,6 +42,9 @@
         <div class="row">
             {% for i in APPARTMENT %}
             <div class="col-lg-4 col">
+                <script>
+                    console.log(`{{APPARTMENT}}`)
+                </script>
                 <div class="card margin-style" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{i[0]}}</h5>
@@ -53,11 +56,16 @@
                         <li class="list-group-item">{{i[3]}}</li>
                         <li class="list-group-item">{{i[5]}}</li>
                         {% if i[6] == 0 %}
-                        <li class="list-group-item">non louer</li>
+                        <li class="list-group-item">non-loué</li>
                         {% else %}
                         <li class="list-group-item">Louer</li>
                         {% endif %}
                     </ul>
+                    <div class="card-body">
+                        <imput class="btn btn-dark" style="float:right;background-color:red;border: 0ch;" type="button" onclick="doFunction(`{{i[0]}}`)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             {% endfor %}
