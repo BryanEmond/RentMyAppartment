@@ -1,7 +1,7 @@
--- CREATE INDEX indexMDP ON password(PID) USING HASH;
--- CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) USING HASH;
--- CREATE INDEX indexUser ON user(UID) USING HASH;
--- CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD, description text) USING HASH;
+CREATE INDEX indexMDP ON password(PID) ;
+CREATE INDEX indexLocalisation ON localisation(LID, CID, countryName) ;
+CREATE INDEX indexUser ON user(UID) ;
+CREATE INDEX indexAppartments ON appartments(AID, price, LID, SOLD) ;
 
 
 delimiter //
@@ -34,9 +34,9 @@ END//
 CREATE TRIGGER update_qty AFTER INSERT ON appartments 
     FOR EACH ROW
     BEGIN
-        UPDATE nbAppartement;
-        SET nbAppartement = nbAppartement + 1;
-        WHERE 
+        UPDATE localisation
+        SET nbAppartement = nbAppartement + 1
+        WHERE appartments.LID = localisation.LID;
 END//
 
 delimiter ;
