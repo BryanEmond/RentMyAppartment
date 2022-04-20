@@ -102,8 +102,7 @@ $("#createAdForm").submit((e) => {
     })
 });
 
-function doFunction(app){
-    console.log(app)
+function supprimer(app){
     $.ajax({
         url: '/api/deleteAppartment',
         type: 'post',
@@ -136,3 +135,28 @@ $("#SearchApp").submit((e) => {
         }
     })
 });
+
+function louerAppartment(app){
+    $.ajax({
+        url: '/api/louerAppartment',
+        type: 'post',
+        data: {
+            "AID": app
+        },
+        success: (response) => {
+            location.reload();
+        }
+    })
+}
+function RetirerAppartment(app){
+    $.ajax({
+        url: '/api/RetirerAppartment',
+        type: 'post',
+        data: {
+            "AID": app
+        },
+        success: (response) => {
+            location.reload();
+        }
+    })
+}

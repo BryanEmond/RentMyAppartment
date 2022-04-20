@@ -29,7 +29,7 @@ mycursor = mydb.cursor()
 def register():
     mycursor.callproc("selection_appt_grandeur")
     size = mycursor.fetchall()
-    sql = "SELECT * FROM appartments ORDER BY LID"
+    sql = "SELECT * FROM appartments WHERE SOLD <> TRUE ORDER BY LID"
     mycursor.execute(sql)
     appartment = mycursor.fetchall()
     sql = "SELECT * FROM localisation"
@@ -134,6 +134,26 @@ def search():
 def deleteAppatment():
     try :
         sql = "DELETE FROM appartments WHERE AID = %s"
+        mycursor.execute(sql,request.form.get('AID') )
+        mydb.commit()
+        return ("", 202)
+    except:
+        return ("", 404)
+
+@app.route("/api/louerAppartment", methods=['POST'])
+def louerAppartment():
+    try :
+        sql = "UPDATE appartments SET SOLD = TRUE WHERE AID = %s;"
+        mycursor.execute(sql,request.form.get('AID') )
+        mydb.commit()
+        return ("", 202)
+    except:
+        return ("", 404)
+
+@app.route("/api/RetirerAppartment", methods=['POST'])
+def RetirerAppartment():
+    try :
+        sql = "UPDATE appartments SET SOLD = FALSE WHERE AID = %s;"
         mycursor.execute(sql,request.form.get('AID') )
         mydb.commit()
         return ("", 202)

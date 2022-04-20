@@ -61,10 +61,18 @@
                         <li class="list-group-item">Loué</li>
                         {% endif %}
                     </ul>
-                    <div class="card-body">
-                        <imput class="btn btn-dark" style="float:right;background-color:red;border: 0ch;" type="button" onclick="doFunction(`{{i[0]}}`)">
+                    <div class="col">
+                        {% if i[6] == 0 %}
+                        <input class="btn btn-dark" type="button"
+                        onclick="louerAppartment(`{{i[0]}}`)" value="Retirer des appartment a loué">
+                        {% else %}
+                        <input class="btn btn-dark" type="button"
+                        onclick="RetirerAppartment(`{{i[0]}}`)" value="Mettre a loué">
+                        {% endif %}
+                        <imput class="btn btn-dark" style="background-color:red;border: 0ch;" type="button"
+                            onclick="supprimer(`{{i[0]}}`)" value="">
                             <i class="fa-solid fa-trash"></i>
-                        </button>
+                            </input>
                     </div>
                 </div>
             </div>
