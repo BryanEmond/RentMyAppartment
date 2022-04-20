@@ -18,17 +18,17 @@ END //
 CREATE PROCEDURE selection_appartment
     (AID text,LOC INT,SIZE text,MINP INT,MAXP INT)
 BEGIN
-    IF MAXP > 0 AND SIZE <> "0" AND LOC > 0 THEN
-      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID, '%') AND SOLD <> TRUE AND LID = LOC AND GID = SIZE AND price >= MINP AND price <= MAXP);
+    IF MAXP > 0 AND SIZE <> "0" AND LOC >= 0 THEN
+      SELECT * FROM appartments WHERE AID LIKE CONCAT('%', AID, '%') AND SOLD <> TRUE AND LID = LOC AND GID = SIZE AND (price >= MINP AND price <= MAXP);
     ELSEIF MAXP > 0 AND SIZE <> "0" THEN
-      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND GID = SIZE AND price >= MINP AND price <= MAXP);
-    ELSEIF MAXP > 0 AND LOC > 0 THEN
-      SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND LID = LOC AND price >= MINP AND price <= MAXP);
+      SELECT * FROM appartments WHERE AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND GID = SIZE AND (price >= MINP AND price <= MAXP);
+    ELSEIF MAXP > 0 AND LOC >= 0 THEN
+      SELECT * FROM appartments WHERE AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND LID = LOC AND (price >= MINP AND price <= MAXP);
     ELSEIF MAXP > 0 THEN
       SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND price >= MINP AND price <= MAXP);
     ELSEIF SIZE <> "0" THEN
       SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND GID = SIZE AND price >= MINP);
-    ELSEIF LOC > 0 THEN
+    ELSEIF LOC >= 0 THEN
       SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND LID = LOC AND price >= MINP);
     ELSE
       SELECT * FROM appartments WHERE (AID LIKE CONCAT('%', AID , '%') AND SOLD <> TRUE AND price >= MINP);

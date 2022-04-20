@@ -118,6 +118,7 @@ function supprimer(app){
 
 $("#SearchApp").submit((e) => {
     e.preventDefault();
+    console.log($("#searchTown").val())
     $.ajax({
         url: '/api/searchAppartment',
         type: 'post',
@@ -125,7 +126,7 @@ $("#SearchApp").submit((e) => {
             "UID": USERConst,
             "town": $("#searchTown").val(),
             "size": $("#searchSize").val(),
-            "AID": $("#searchAddress").val(),
+            "AID": "",
             "minPrice": $("#minPrice").val(),
             "maxPrice": $("#maxPrice").val(),
 
