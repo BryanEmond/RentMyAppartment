@@ -1,4 +1,3 @@
-from email import message
 from flask import Flask, jsonify, make_response, request, redirect, render_template, url_for
 from dotenv import load_dotenv
 # from flask_cors import CORS
