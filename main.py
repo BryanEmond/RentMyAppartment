@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 # from flask_cors import CORS
 import pymysql
 import bcrypt
-import base64
 import os
 import sys
 import jwt
@@ -75,8 +74,6 @@ def create_account():
 
 @app.route("/api/CreateAd", methods=['POST'])
 def CreateAd():
-    base64_byte = base64.b64encode(request.form.get('AID').encode("ascii"))
-    base64_string = base64_byte.decode("ascii")
     sql = "INSERT INTO appartments VALUES (%s,%s,%s,%s,%s,%s,%s)"
     mycursor.execute(sql, (request.form.get('AID'), int(request.form.get('price')), request.form.get('description'), request.form.get('UID'),int(request.form.get('town')), request.form.get('size'),False))
     mydb.commit()
